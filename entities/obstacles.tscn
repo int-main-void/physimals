@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bhdvcmrbh3epo"]
+
+[node name="Obstacles" type="RigidBody2D"]

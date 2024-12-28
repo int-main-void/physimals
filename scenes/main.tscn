@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://dido28404lqrg"]
+
+[ext_resource type="PackedScene" uid="uid://rnep5nkgg10y" path="res://entities/characters/player/player.tscn" id="1_1u82q"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_rl82q"]
+[ext_resource type="PackedScene" uid="uid://164b0sorbl10" path="res://entities/obstacles/box.tscn" id="2_ynudm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8klmc"]
+size = Vector3(1000, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_li7sp"]
+size = Vector2(1000, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lx7mi"]
+size = Vector2(200, 1000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1tgr6"]
+size = Vector3(200, 1000, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wk5y7"]
+size = Vector3(15, 50, 1)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rl82q")
+
+[node name="Player" parent="." instance=ExtResource("1_1u82q")]
+position = Vector2(124, 557)
+
+[node name="World" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="World" groups=["ground"]]
+position = Vector2(500, 600)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Ground"]
+mesh = SubResource("BoxMesh_8klmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground"]
+shape = SubResource("RectangleShape2D_li7sp")
+
+[node name="Ground2" type="StaticBody2D" parent="World" groups=["ground"]]
+position = Vector2(1343, 791)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Ground2"]
+mesh = SubResource("BoxMesh_8klmc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Ground2"]
+shape = SubResource("RectangleShape2D_li7sp")
+
+[node name="Wall1" type="StaticBody2D" parent="World" groups=["ground"]]
+position = Vector2(-100, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Wall1"]
+shape = SubResource("RectangleShape2D_lx7mi")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Wall1"]
+mesh = SubResource("BoxMesh_1tgr6")
+
+[node name="Wall2" type="StaticBody2D" parent="World" groups=["ground"]]
+position = Vector2(1951, 500)
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Wall2"]
+shape = SubResource("RectangleShape2D_lx7mi")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="World/Wall2"]
+mesh = SubResource("BoxMesh_1tgr6")
+
+[node name="Obstacles" type="Node" parent="."]
+
+[node name="Box" parent="Obstacles" instance=ExtResource("2_ynudm")]
+position = Vector2(313, 593)
+
+[node name="Box2" parent="Obstacles" instance=ExtResource("2_ynudm")]
+position = Vector2(708, 593)
+
+[node name="Box3" parent="Obstacles" instance=ExtResource("2_ynudm")]
+position = Vector2(708, 526)
+
+[node name="Box4" parent="Obstacles" instance=ExtResource("2_ynudm")]
+position = Vector2(975, 779)
+
+[node name="Slingshot" type="Node2D" parent="."]
+visible = false
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Slingshot"]
+position = Vector2(147, 575)
+mesh = SubResource("BoxMesh_wk5y7")
